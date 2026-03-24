@@ -1,0 +1,121 @@
+/* Configurações Globais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #f4f4f9;
+}
+
+/* Layout Principal com CSS Grid */
+.container {
+    display: grid;
+    grid-template-columns: 200px 1fr; /* Menu lateral fixo e conteúdo flexível */
+    grid-template-rows: 80px 1fr;    /* Altura fixa para o cabeçalho */
+    grid-template-areas: 
+        "menu cabecalho"
+        "menu principal";
+    height: 100vh;
+}
+
+/* Menu Lateral - Utilizando Flexbox Vertical */
+.menu-lateral {
+    grid-area: menu;
+    background-color: #2c3e50;
+    color: white;
+    padding: 20px;
+    display: flex; /* Requisito: Flexbox no menu [cite: 89] */
+    flex-direction: column;
+    gap: 20px;
+}
+
+.menu-lateral ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.menu-lateral a {
+    color: #ecf0f1;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Cabeçalho - Layout Flexbox */
+.cabecalho {
+    grid-area: cabecalho;
+    background: linear-gradient(90deg, #007bff, #00d084);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+}
+
+/* Botão com Transição Suave */
+.btn-animate {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #ffffff;
+    color: #007bff;
+    cursor: pointer;
+    font-weight: bold;
+    /* Transição suave [cite: 91] */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-animate:hover {
+    background-color: #2c3e50;
+    color: #ffffff;
+}
+
+/* Conteúdo Principal */
+.principal {
+    grid-area: principal;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    overflow-y: auto;
+}
+
+/* Caixas de Conteúdo com Animação */
+.content-box {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    /* Aplicação da animação [cite: 92] */
+    animation: slideIn 0.8s ease-out forwards;
+    opacity: 0; /* Começa invisível para a animação funcionar */
+}
+
+/* Definição da Animação @keyframes */
+@keyframes slideIn {
+    0% {
+        transform: translateX(-50px); /* Desliza da esquerda [cite: 61, 92] */
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Responsividade Básica */
+@media (max-width: 768px) {
+    .container {
+        grid-template-columns: 1fr;
+        grid-template-areas: 
+            "cabecalho"
+            "principal";
+    }
+    .menu-lateral {
+        display: none; /* Esconde o menu em telas pequenas para simplificar */
+    }
+}
